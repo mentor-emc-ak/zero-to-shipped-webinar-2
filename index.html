@@ -1,76 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>0→shipped Resume Parser</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <header class="nav">
-    <div class="logo">0<span class="logo-arrow">→</span>shipped</div>
-    <span class="nav-tag">resume parser</span>
-  </header>
-
-  <main>
-    <section class="hero">
-      <h1>Know where your resume stands,<br />before anyone else reads it.</h1>
-      <p class="sub">
-        Drop in a PDF and get an instant score, the skills it found,
-        and the ones a recruiter will notice are missing.
-      </p>
-    </section>
-
-    <!-- Upload card: hidden once results are shown -->
-    <section class="card" id="upload-card">
-      <div class="dropzone" id="dropzone" role="button" tabindex="0"
-           aria-label="Upload a resume PDF">
-        <div class="drop-icon">📄</div>
-        <p class="drop-title">Drop your resume here</p>
-        <p class="drop-hint">PDF only · max ~5 MB · nothing is uploaded, it all runs in your browser</p>
-        <button class="btn" type="button">Choose a PDF</button>
-        <input type="file" id="file-input" accept="application/pdf,.pdf" hidden />
-      </div>
-      <p class="error" id="error" hidden></p>
-
-      <div class="steps" id="steps" hidden>
-        <p class="step" data-step="1">Reading PDF…</p>
-        <p class="step" data-step="2">Extracting skills…</p>
-        <p class="step" data-step="3">Scoring against a target role…</p>
-      </div>
-    </section>
-
-    <!-- Results card -->
-    <section class="card" id="result-card" hidden>
-      <div class="result-head">
-        <div class="score-ring" id="score-ring" style="--p:0">
-          <div class="score-num"><span id="score-value">0</span><span class="score-max">/100</span></div>
-        </div>
-        <div class="result-meta">
-          <p class="verdict" id="verdict"></p>
-          <p class="file-name" id="file-name"></p>
-        </div>
-      </div>
-
-      <div class="skills-grid">
-        <div class="skill-col">
-          <h2><span class="dot dot-good"></span> Skills present</h2>
-          <ul class="chips" id="present-skills"></ul>
-        </div>
-        <div class="skill-col">
-          <h2><span class="dot dot-miss"></span> Skills missing</h2>
-          <ul class="chips chips-miss" id="missing-skills"></ul>
-        </div>
-      </div>
-
-      <button class="btn btn-ghost" id="reset-btn" type="button">Try another resume</button>
-    </section>
-  </main>
-
-  <footer>
-    <p>0→shipped · mock demo — scores are generated in the browser, no data leaves your machine.</p>
-  </footer>
-
-  <script src="script.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>0→shipped Resume Parser</title>
+  </head>
+  <body>
+    <!-- React mounts here; everything is rendered from src/ -->
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
