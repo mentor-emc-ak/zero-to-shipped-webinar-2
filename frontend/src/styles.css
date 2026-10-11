@@ -171,6 +171,21 @@ body {
 .verdict { font-size: 1.15rem; font-weight: 700; }
 .file-name { color: var(--muted); font-size: 0.85rem; margin-top: 4px; }
 
+.engine-badge {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 3px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.engine-badge.engine-ai {
+  border-color: var(--good);
+  color: var(--good);
+}
+
 .skills-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;

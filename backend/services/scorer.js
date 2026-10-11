@@ -1,5 +1,6 @@
-// Mock scorer. Real text extraction + AI comparison come later
-// (DECISION.md: "AI part will be added later").
+// Keyword fallback scorer — used when the labd AI call fails
+// (bad key, allowance spent, malformed reply). The primary path is
+// services/aiScorer.js. Real text extraction happens in scoringService.js.
 const SKILLS = [
   "JavaScript", "TypeScript", "React", "Node.js", "Python", "Java", "SQL",
   "PostgreSQL", "MongoDB", "Docker", "Kubernetes", "AWS", "Git", "CI/CD",

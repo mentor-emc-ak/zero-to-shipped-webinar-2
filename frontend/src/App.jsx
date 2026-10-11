@@ -37,8 +37,8 @@ export default function App() {
 
       <footer>
         <p>
-          0→shipped · mock demo — scores are generated in the browser, no data
-          leaves your machine.
+          0→shipped · your resume is scored by the backend, with an AI match
+          when the service is reachable.
         </p>
       </footer>
     </>

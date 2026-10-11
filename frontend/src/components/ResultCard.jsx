@@ -13,6 +13,9 @@ export default function ResultCard({ result, onReset }) {
         <div className="result-meta">
           <p className="verdict">{verdict}</p>
           <p className="file-name">{fileName}</p>
+          <span className={`engine-badge${result.engine === "ai" ? " engine-ai" : ""}`}>
+            {result.engine === "ai" ? "AI match" : "Keyword fallback"}
+          </span>
         </div>
       </div>
 
