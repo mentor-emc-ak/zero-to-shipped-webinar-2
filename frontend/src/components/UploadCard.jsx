@@ -1,20 +1,14 @@
 import { useRef, useState } from "react";
-import { extractPdfText, computeResult, validateFile } from "../lib/parser.js";
-
-const STEPS = [
-  "Reading PDF…",
-  "Extracting skills…",
-  "Scoring against a target role…",
-];
-
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+import { validateFile } from "../lib/parser.js";
+import { scoreResume } from "../lib/api.js";
 
 export default function UploadCard({ onResult }) {
   const fileInputRef = useRef(null);
   const [error, setError] = useState(null);
-  // 0 = idle, 1..3 = step i is active, 4 = all steps done
+  // step 0 = idle, 1 = request in flight
   const [step, setStep] = useState(0);
   const [dragging, setDragging] = useState(false);
+  const [jd, setJd] = useState("");
 
   async function handleFile(file) {
     if (!file) return;
@@ -25,21 +19,13 @@ export default function UploadCard({ onResult }) {
     }
     setError(null);
 
-    for (let i = 1; i <= STEPS.length; i++) {
-      setStep(i);
-      await sleep(700);
+    setStep(1);
+    try {
+      onResult(await scoreResume(file, jd));
+    } catch (err) {
+      setError(err.message);
+      setStep(0);
     }
-    setStep(STEPS.length + 1);
-
-    const buffer = await file.arrayBuffer();
-    const text = extractPdfText(buffer);
-    onResult(computeResult(file.name, text));
-  }
-
-  function stepClass(index) {
-    if (index < step - 1) return "step done";
-    if (index === step - 1) return "step active";
-    return "step";
   }
 
   return (
@@ -70,8 +56,7 @@ export default function UploadCard({ onResult }) {
         <div className="drop-icon">📄</div>
         <p className="drop-title">Drop your resume here</p>
         <p className="drop-hint">
-          PDF only · max ~5 MB · nothing is uploaded, it all runs in your
-          browser
+          PDF only · max ~5 MB · your resume is scored by the local backend
         </p>
         <button className="btn" type="button">
           Choose a PDF
@@ -85,17 +70,20 @@ export default function UploadCard({ onResult }) {
         />
       </div>
 
-      {error && <p className="error">{error}</p>}
+      <label className="jd-label" htmlFor="jd">
+        Job description (optional)
+      </label>
+      <textarea
+        id="jd"
+        className="jd-input"
+        rows={5}
+        placeholder="Paste the job description to score against it…"
+        value={jd}
+        onChange={(e) => setJd(e.target.value)}
+      />
 
-      {step > 0 && (
-        <div className="steps">
-          {STEPS.map((label, index) => (
-            <p key={label} className={stepClass(index)}>
-              {label}
-            </p>
-          ))}
-        </div>
-      )}
+      {step === 1 && <p className="scoring">Scoring your resume…</p>}
+      {error && <p className="error">{error}</p>}
     </section>
   );
 }

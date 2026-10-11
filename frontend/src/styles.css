@@ -108,16 +108,27 @@ body {
   text-align: center;
 }
 
-.steps { margin-top: 20px; text-align: center; }
-.step {
-  color: var(--muted);
+.scoring { margin-top: 20px; text-align: center; color: var(--muted); font-size: 0.9rem; }
+.jd-label {
+  display: block;
+  margin-top: 20px;
   font-size: 0.9rem;
-  padding: 4px 0;
-  opacity: 0.35;
-  transition: opacity 0.3s, color 0.3s;
+  font-weight: 600;
+  color: var(--muted);
 }
-.step.active { opacity: 1; color: var(--text); }
-.step.done { opacity: 0.8; color: var(--accent); }
+.jd-input {
+  width: 100%;
+  margin-top: 8px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.9rem;
+  padding: 10px 12px;
+  resize: vertical;
+}
+.jd-input:focus { outline: none; border-color: var(--accent-2); }
 
 /* ---------- results ---------- */
 .result-head {
