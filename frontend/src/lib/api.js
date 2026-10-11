@@ -1,5 +1,8 @@
 // The single place the frontend talks to the backend.
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
+// Same-origin by default: "/api" reaches the backend through the Vite dev
+// proxy locally and the Vercel rewrite in production. VITE_API_URL can still
+// override for a separately deployed backend.
+const API_URL = import.meta.env.VITE_API_URL || "";
 
 function verdictFor(score) {
   return score >= 70 ? "Strong match 🎯"
